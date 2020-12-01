@@ -66,6 +66,5 @@ int main()
 //    insert(&arr,3,10);
     del(&arr,3);
     display(arr);
-    cout<<"hello";
     return 0;
 }
