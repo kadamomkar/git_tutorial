@@ -58,23 +58,89 @@ void del(struct ar *arr,int p)
     }
 }
 
-int lin_search(struct ar *arr,int x)
+void swap(int *a,int *b)
+{
+    int temp;
+    temp=*a;
+    *a=*b;
+    *b=temp;
+}
+
+int lin_search_mod1(struct ar *arr,int x)
 {
     for(int i=0;i<arr->length;i++)
     {
         if(arr->A[i]==x)
-        {return i;
+        {
+            swap(&(arr->A[i]),&(arr->A[i-1]));
+            return i-1;
          break;
         }
     }
     return -1;
 }
 
+int lin_search_mod2(struct ar *arr,int x)
+{
+    for(int i=0;i<arr->length;i++)
+    {
+        if(arr->A[i]==x)
+        {
+            swap(&(arr->A[i]),&(arr->A[0]));
+            return 0;
+         break;
+        }
+    }
+    return -1;
+}
+int bin_search(struct ar *arr,int x)
+{
+    int low=0,high=(arr->length)-1,mid;
+    while(low<=high)
+    {
+        mid=(low+high)/2;
+        if(arr->A[mid]==x)
+        {return mid;
+            break;
+        }
+        if(arr->A[mid]<x)
+            low=mid+1;
+        if(arr->A[mid]>x)
+            high=mid-1;
+        
+    }
+    return -1;
+}
+
+int bin_search_rec(struct ar arr,int x,int high ,int low)
+{ if(low<=high)
+  { int mid=(low+high)/2;
+    
+     if(arr.A[mid]==x)
+        return mid;
+   
+     else if(arr.A[mid]<x)
+      {
+         low=mid+1;
+         return bin_search_rec(arr,x,high,low);
+      }
+     else 
+      {
+        high=mid-1;
+        return bin_search_rec(arr,x,high,low);
+      }
+     
+  }
+    else return -1;
+}
+
 int main()
 {
-    struct ar arr={{0,1,2,3,4},10,5};
-
-    cout<<lin_search(&arr,10);
+    struct ar arr={{5,10,15,30,40},10,5};
+    cout<<bin_search_rec(arr,40,(arr.length)-1,0);
+//    cout<<bin_search(&arr,40);
+//    cout<<lin_search_mod2(&arr,3);
+//    cout<<lin_search_mod1(&arr,3);
 //    append(&arr,10);
 //    insert(&arr,3,10);
 //    del(&arr,3);
