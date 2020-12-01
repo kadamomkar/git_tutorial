@@ -58,13 +58,26 @@ void del(struct ar *arr,int p)
     }
 }
 
+int lin_search(struct ar *arr,int x)
+{
+    for(int i=0;i<arr->length;i++)
+    {
+        if(arr->A[i]==x)
+        {return i;
+         break;
+        }
+    }
+    return -1;
+}
 
 int main()
 {
     struct ar arr={{0,1,2,3,4},10,5};
+
+    cout<<lin_search(&arr,10);
 //    append(&arr,10);
 //    insert(&arr,3,10);
-    del(&arr,3);
-    display(arr);
+//    del(&arr,3);
+//    display(arr);
     return 0;
 }
